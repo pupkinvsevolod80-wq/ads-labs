@@ -1,24 +1,12 @@
-from random import randint
+def quick_sort(arr):
+    if len(arr)<=1:
+        return arr
+    pivot = arr[len(arr)//2]
+    left=[x for x in arr if x<pivot]
+    mid=[x for x in arr if x==pivot]
+    right=[x for x in arr if x>pivot]
+    return quick_sort(left) + mid + quick_sort(right)
 
-def quick_sort(arr, left, right):
-    if left < right:
-        val = arr[randint(left, right)]
-        l, r = left, right
-        while l <= r:
-            while arr[l] < val:
-                l += 1
-            while arr[r] > val:
-                r -= 1
-            if l <= r:
-                arr[l], arr[r] = arr[r], arr[l]
-                l += 1
-                r -= 1
-        if left < r:
-            quick_sort(arr, left, r)
-        if right > l:
-            quick_sort(arr, l, right)
-
-N = int(input())
-arr = list(map(int, input().split()))
-quick_sort(arr, 0, len(arr) - 1)
-print(*arr)
+n = int(input())
+arr=list(map(int,input().split()))
+print(*quick_sort(arr))
